@@ -1,0 +1,929 @@
+<!-- <app-header></app-header> -->
+
+<div class="mt-5 m-5 divheader">
+  <br />
+  <br />
+  <br />
+  <br />
+  <mat-horizontal-stepper linear #stepper dir="rtl" class="cc">
+    <mat-step [stepControl]="firstFormGroup">
+      <form class="divInput" [formGroup]="firstFormGroup" dir="rtl">
+        <ng-template matStepLabel>{{'insurace.info'|translate}}</ng-template>
+        <div class="flexheader">
+          <h1>{{'insurace.title'|translate}}</h1>
+        </div>
+        <hr />
+
+        <div class="form-row">
+          <div class="col-md-6 mb-3">
+            <label for="validationServer01" class="font"
+              >{{'insurace.name'|translate}}</label
+            >
+            <input
+              formControlName="Name"
+              type="text"
+              class="form-control"
+              id="validationServer01"
+              value="Mark"
+              required
+            />
+
+            <div
+              *ngIf="
+                firstFormGroup.controls['Name'].invalid &&
+                (firstFormGroup.get('Name')?.dirty ||
+                  firstFormGroup.get('Name')?.touched)
+              "
+            >
+              <br />
+              <small
+                *ngIf="firstFormGroup.controls['Name'].errors?.required"
+                class="alert alert-danger"
+                >Please Enter Your Name</small
+              >
+              <small
+                *ngIf="firstFormGroup.controls['Name'].errors?.minlength"
+                class="alert alert-danger"
+                >Please Enter Your Name</small
+              >
+              <br />
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="validationServer01" class="font"
+              >{{'insurace.mail'|translate}}</label
+            > 
+            <input
+              autofocus
+              formControlName="Email"
+              type="text"
+              class="form-control"
+              id="validationServer01"
+              value="Name"
+            />
+
+            <div
+              *ngIf="
+                firstFormGroup.controls['Email'].invalid &&
+                (firstFormGroup.get('Email')?.dirty ||
+                  firstFormGroup.get('Email')?.touched)
+              "
+            >
+              <br />
+              <small
+                *ngIf="firstFormGroup.controls['Email'].errors?.required"
+                class="alert alert-danger"
+                >Please Enter Your Email</small
+              >
+              <small
+                *ngIf="firstFormGroup.controls['Email'].hasError('email')"
+                class="alert alert-danger"
+                >example@example.com</small
+              >
+              <br />
+              <br />
+            </div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col-md-4 mb-3">
+            <label for="validationServer01" class="font">{{'insurace.mobile'|translate}}</label>
+            <input
+              formControlName="Mobile"
+              type="text"
+              class="form-control"
+              id="validationServer01"
+              value="Mark"
+              required
+            />
+            <div
+              *ngIf="
+                firstFormGroup.controls['Mobile'].invalid &&
+                (firstFormGroup.get('Mobile')?.dirty ||
+                  firstFormGroup.get('Mobile')?.touched)
+              "
+            >
+              <br />
+              <small
+                *ngIf="firstFormGroup.controls['Mobile'].errors?.required"
+                class="alert alert-danger"
+                >Please Enter Your Mobile</small
+              >
+              <small
+                *ngIf="firstFormGroup.controls['Mobile'].errors?.minlength"
+                class="alert alert-danger"
+                >Please Enter Your Mobile</small
+              >
+              <br />
+              <br />
+            </div>
+          </div>
+        </div>
+        <div>
+          <button
+            mat-button
+            matStepperNext
+            class="btn btn-lg btn-info"
+            (click)="firstNext()"
+          >
+            Next
+          </button>
+          <button
+            mat-button
+            class="btn btn-lg btn-primary mr-4"
+            (click)="resetform(firstFormGroup)"
+          >
+            Reset
+          </button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup">
+      <form class="divInput" dir="rtl" [formGroup]="secondFormGroup">
+        <ng-template matStepLabel>{{'insurace.add'|translate}}</ng-template>
+        <div class="flexheader">
+          <h1>{{'insurace.add'|translate}}</h1>
+        </div>
+        <hr />
+
+        <div class="form-row">
+          <div class="col-md-3 mb-3 form-group">
+            <label for="TourID" class="font">{{'insurace.serial'|translate}}</label>
+
+            <input type="text" formControlName="id" class="form-control" />
+          </div>
+          <div class="col-md-3 mb-3 form-group">
+            <label class="font" for="Title">{{'insurace.type'|translate}}</label>
+            <select class="form-control" formControlName="Title" id="Title">
+              <option value="" style="    display: none;"></option>
+
+
+              <option>{{'insurace.otom'|translate}}</option>
+              <option>{{'insurace.manual'|translate}}</option>
+            </select>
+          </div>
+          <div class="col-md-3 mb-3 form-group">
+            <label class="font" for="Date">{{'insurace.use'|translate}}</label>
+            <select class="form-control" formControlName="Date" id="Date">
+              <!-- <option disabled selected value> -- select an option -- </option> -->
+            <option value="" style="    display: none;"></option>
+
+
+              <option>{{'insurace.personal'|translate}}</option>
+              <option>{{'insurace.fare'|translate}}</option>
+              <option>{{'insurace.load'|translate}}</option>
+              <option>{{'insurace.other'|translate}}</option>
+            </select>
+          </div>
+          <div class="col-md-3 mb-3 form-group">
+            <label class="font" for="TourDistance"
+              >{{'insurace.value'|translate}}</label
+            >
+
+            <input
+              type="text"
+              class="form-control inputprice"
+              id="TourDistance"
+              formControlName="Section"
+              [(ngModel)]="price"
+            />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="col-md-3 mb-3 form-group">
+            <label class="font" for="Image">{{'insurace.year'|translate}}</label>
+            <select
+              class="form-control selectpicker"
+              title="Select your surfboard"
+              formControlName="Image"
+              [(ngModel)]="yearof"
+              id="Rate"
+            >
+            <option value="" style="    display: none;"></option>
+
+              <option *ngFor="let item of yeararr">{{ item.no }}</option>
+            </select>
+          </div>
+          <div class="col-md-3 mb-3 form-group">
+            <label class="font" for="Rate">{{'insurace.typeof'|translate}}</label>
+            <!-- <p-cascadeSelect class="form-control selectpicker" formControlName="Rate" [(ngModel)]="selectedCity1" [options]="countries" optionLabel="cname" optionGroupLabel="name"
+                  [optionGroupChildren]="['states', 'cities']" [style]="{'minWidth': '14rem'}">
+                </p-cascadeSelect>
+ -->
+            <select
+              matNativeControl
+              class="form-control selectpicker"
+              formControlName="Rate"
+            >
+            <option value="" style="    display: none;"></option>
+              <optgroup label="TOYOYA">
+                <option >TOYOYA Avalon</option>
+                <option >TOYOYA Camry</option>
+
+                <option >TOYOYA Prius</option>
+                <option >TOYOYA Yaris</option>
+
+                <option >TOYOYA 86</option>
+                <option>TOYOYA Sienna</option>
+
+                <option >TOYOYA C-HR</option>
+
+                <option >TOYOYA RAV4</option>
+
+                <option >TOYOYA Highlander</option>
+                <option >TOYOYA 4Runner</option>
+
+                <option>TOYOYA Tacoma</option>
+                <option>TOYOYA Tundra</option>
+              </optgroup>
+              <optgroup class="ss" label="Ford">
+                <option>Ford Edge</option>
+                <option>Ford Bronco</option>
+                <option>Ford Ecosport</option>
+                <option>Ford Edge</option>
+                <option>Ford Endeavo</option>
+
+                <option>Ford Escape</option>
+                <option>Ford Everest</option>
+                <option>Ford Flex</option>
+                <option>Ford F-450</option>
+              </optgroup>
+
+              <optgroup label="BMW">
+                <option>BMW 5</option>
+                <option>BMW 6</option>
+                <option>BMW X2</option>
+                <option>BMW X3</option>
+                <option>BMW X4</option>
+                <option>BMW X5</option>
+                <option>BMW 8</option>
+                <option>BMW Z4</option>
+                <option>BMW 3</option>
+                <option>BMW 1</option>
+                <option>BMW X6</option>
+                <option>BMW X7</option>
+                <option>BMW 2</option>
+                <option>BMW 4</option>
+                <option>BMW X1</option>
+              </optgroup>
+
+              <optgroup class="ss" label="Audi">
+                <option>Audi A6</option>
+                <option>Audi A3</option>
+                <option>Audi A5</option>
+                <option>Audi A6</option>
+                <option>Audi S2 Coupé B3</option>
+                <option>Audi S4 C4</option>
+                <option>Audi S2 Avant B4</option>
+                <option>Audi S2 Sedan B4</option>
+                <option>Audi Avant RS 2 P1</option>
+                <option>Audi S8 D2</option>
+                <option>Audi A4</option>
+                <option>Audi A8</option>
+                <option>Audi A3</option>
+              </optgroup>
+              <optgroup label="Volkswagen">
+                <option>Volkswagen Cross Sport</option>
+                <option>Volkswagen Tiguan</option>
+                <option>Volkswagen Jetta</option>
+                <option>Volkswagen Jetta GLI</option>
+                <option>Volkswagen Passat</option>
+                <option>Volkswagen Arteon</option>
+              </optgroup>
+              <optgroup class="ss" label="Mercedes ">
+                <option>Mercedes Vito</option>
+                <option>Mercedes C190 AMG GT</option>
+                <option>Mercedes X253 GLC</option>
+                <option>Mercedes W213 E</option>
+                <option>Mercedes BR470 X</option>
+                <option>Mercedes W177 A</option>
+                <option>Mercedes C257 CLS</option>
+                <option>Mercedes Mercedes-AMG</option>
+                <option>Mercedes W463 G</option>
+                <option>Mercedes EQC</option>
+                <option>Mercedes W167 GLE</option>
+                <option>Mercedes W247 B</option>
+                <option>Mercedes C118 CLA</option>
+                <option>Mercedes X247 GLB</option>
+                <option>Mercedes X167 GLS</option>
+              </optgroup>
+              <optgroup label="NISSAN ">
+                <option>NISSAN 370Z</option>
+                <option>NISSAN Altima</option>
+                <option>NISSAN Armada</option>
+                <option>NISSAN GT-R</option>
+                <option>NISSAN Kicks</option>
+                <option>NISSAN Maxima</option>
+                <option>NISSAN Murano</option>
+                <option>NISSAN NV Cargo</option>
+              </optgroup>
+
+              <optgroup class="ss" label=" Mazda  ">
+                <option>Mazda MX-5 RF</option>
+                <option>Mazda 2. Hatchback</option>
+                <option>Mazda 5</option>
+                <option>Mazda CX-3</option>
+                <option>Mazda CX-9</option>
+              </optgroup>
+              <optgroup label="VOLVO">
+                <option >VOLVO S90/V90</option>
+                <option >Volvo C40</option>
+                <option >VOLVO XC40</option>
+                <option >VOLVO C70</option>
+                <option >VOLVO XC90</option>
+                <option >VOLVO C30</option>
+              </optgroup>
+              <optgroup class="ss" label="Mitsubishi">
+                <option>Mitsubishi CROSS</option>
+                <option>Mitsubishi XPANDER</option>
+                <option>Mitsubishi OUTLANDER PHEV</option>
+                <option>Mitsubishi OUTLANDER</option>
+                <option>Mitsubishi TRITON</option>
+                <option>Mitsubishi ASX/OUTLANDER</option>
+                <option>Mitsubishi PAJERO SPORT</option>
+              </optgroup>
+              <optgroup label="Peugeot">
+                <option >Peugeot 508</option>
+                <option >Peugeot 2008</option>
+                <option >Peugeot 3008</option>
+                <option >Peugeot Boxer</option>
+                <option >Peugeot Expert</option>
+                <option >Peugeot Pars</option>
+                <option >Peugeot 5008</option>
+              </optgroup>
+              <optgroup class="ss" label=" KIA">
+                <option >KIA K4</option>
+                <option >KIA K5</option>
+                <option >KIA Rio</option>
+                <option >KIA Stinger</option>
+                <option >KIA Ceed</option>
+                <option >KIA Optima</option>
+                <option >KIA Cadenza</option>
+                <option >KIA XCeed</option>
+]              </optgroup>
+              <optgroup label=" Lexus">
+                <option >Lexus GX 470</option>
+                <option >Lexus LX 450</option>
+                <option >Lexus LX 470</option>
+                <option >Lexus RX 270</option>
+                <option >Lexus LM 350 </option>
+                <option >Lexus NX </option>
+                <option >Lexus CT </option>
+              </optgroup>
+              <optgroup class="ss" label=" Chevrolet">
+                <option >Chevrolet Blazer</option>
+                <option >Chevrolet Tracker</option>
+                <option >Chevrolet Equinox</option>
+                <option >Chevrolet Captiva</option>
+                <option >Chevrolet Tahoe</option>
+                <option >Chevrolet Bolt EUV</option>
+                <option >Chevrolet Groove</option>
+              </optgroup>
+              <optgroup label=" GMC">
+                <option >GMC Yukon XL</option>
+                <option >GMC Acadia</option>
+                <option >GMC Terrain</option>
+                <option >GMC Hummer</option>
+              </optgroup>
+              <optgroup class="ss" label=" Hyundai ">
+                <option >Hyundai Kona Electric	</option>
+                <option >Hyundai Elantra</option>
+                <option >Hyundai Grand i10 Nios</option>
+                <option >Hyundai Xcent Prime</option>
+                
+<option>Hyundai Sonata</option>
+<option>Hyundai Grandeur</option>
+<option>Hyundai Veracruz</option>
+<option>Hyundai Veloster</option>
+<option>Hyundai Coupe</option>
+<option>Hyundai Kona</option>
+<option>Hyundai Matrix</option>
+<option>Hyundai elantra</option>
+<option>Hyundai Pony</option>
+<option>Hyundai Tucson</option>
+<option>Hyundai Getz</option>
+<option>Hyundai Genesis Coupe</option>
+<option>Hyundai Genesis</option>
+<option>Hyundai Santa Fe</option>
+<option>Hyundai i10</option>
+<option>Hyundai Accent</option>
+<option>Hyundai Aero City</option>
+<option>Hyundai Excel</option>
+<option>Hyundai elantra</option>
+              </optgroup>
+              <!-- <optgroup label=" Land rover">
+                <option value="audi">Audi</option>
+              </optgroup>
+              <optgroup class="ss" label=" Infiniti ">
+                <option value="audi">Audi</option>
+              </optgroup>
+              <optgroup label=" Rolls-royce">
+                <option value="audi">Audi</option>
+              </optgroup>
+              <optgroup class="ss" label=" Lamborghini ">
+                <option value="audi">Audi</option>
+              </optgroup>
+            
+              <optgroup label=" Suzuki ">
+                <option value="audi">Audi</option>
+              </optgroup> -->
+            </select>
+
+            <!-- <select class="form-control selectpicker" title="Select your surfboard" formControlName="Rate" id="Rate">
+               
+                  <option >TOYOYA</option>
+                  <option >Ford</option>
+                  <option >BMW</option>
+                  <option >Audi</option>
+                  <option >Volkswagen</option>
+                  <option >Mercedes </option>
+                  <option >NISSAN </option>
+                  <option >Ferrari</option>
+                  <option >VOLVO</option>
+                  <option >Mitsubishi</option>
+                  <option >Peugeot</option>
+                  <option > KIA</option>
+                  <option > lexus</option>
+                  <option > Chevrolet</option>
+                  <option > GMC</option>
+                  <option > Hyundai </option>
+                  <option > Land rover</option>
+                  <option > Infiniti </option>
+                  <option > Rolls-royce</option>
+                  <option > Lamborghini </option>
+                  <option > Ferrari </option>
+                  <option > Mazda  </option>
+                  <option > Suzuki </option>
+                  <option > Ferrari </option>
+                  <option > Ferrari </option>
+                 
+               
+                </select> -->
+          </div>
+          <div class="col-md-3 mb-3 form-group">
+            <label class="font" for="Review">{{'insurace.color'|translate}}</label>
+            <input
+              type="text"
+              class="form-control"
+              id="Review"
+              formControlName="Review"
+            />
+          </div>
+          <div class="col-md-3 mb-3 form-group">
+            <label class="font" for="TourBooked">{{'insurace.shase'|translate}}</label>
+
+            <input type="text" formControlName="Booked" class="form-control" />
+          </div>
+        </div>
+        <hr />
+        <!-- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ person \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ -->
+        <div class="form-row">
+          <div class="col-md-3 mb-3 form-group">
+            <label class="font" for="Price">{{'insurace.status'|translate}}</label>
+            <select
+              class="form-control"
+              formControlName="Price"
+              [(ngModel)]="statuesshow"
+              name="sss"
+              id="Price"
+            >
+            <option value="" style="    display: none;"></option>
+
+            <option>{{'insurace.single'|translate}}</option>
+              <option>{{'insurace.maried'|translate}}</option>
+            </select>
+          </div>
+
+          <div class="col-md-3 mb-3 form-group" *ngIf="statuesshow == 'متزوج'">
+            <label class="font" for="Price">{{'insurace.child'|translate}}</label>
+
+            <select
+              class="form-control"
+              formControlName="noChiled"
+              id="OldPrice"
+            >
+            <option value="" style="    display: none;"></option>
+
+              <option>0</option>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+              <option>6</option>
+              <option>7</option>
+              <option>8</option>
+              <option>9</option>
+              <option>10</option>
+            </select>
+          </div>
+          <div class="col-md-3 mb-3 form-group" *ngIf="statuesshow == 'Married'">
+            <label class="font" for="Price">{{'insurace.child'|translate}}</label>
+
+            <select
+              class="form-control"
+              formControlName="noChiled"
+              id="OldPrice"
+            >
+            <option value="" style="    display: none;"></option>
+
+              <option>0</option>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+              <option>6</option>
+              <option>7</option>
+              <option>8</option>
+              <option>9</option>
+              <option>10</option>
+            </select>
+          </div>
+          <div class="col-md-3 mb-3 form-group">
+            <label class="font" for="TourOldPrice">{{'insurace.profession'|translate}}</label>
+
+            <select
+              class="form-control"
+              formControlName="OldPrice"
+              id="OldPrice"
+            >
+            <option value="" style="    display: none;"></option>
+
+              <option>{{'insurace.gover'|translate}}</option>
+              <option>{{'insurace.private'|translate}}</option>
+              <option>{{'insurace.freelance'|translate}}</option>
+              <option>{{'insurace.student'|translate}}</option>
+              <option>{{'insurace.kasb'|translate}}</option>
+              <option>{{'insurace.notworking'|translate}}</option>
+            </select>
+          </div>
+          <div class="col-md-3 mb-3 form-group">
+            <label class="font" for="gender">{{'insurace.owner'|translate}}</label>
+            <select class="form-control" formControlName="gender" id="gender">
+            <option value="" style="    display: none;"></option>
+
+              <option>{{'insurace.male'|translate}}</option>
+              <option>{{'insurace.female'|translate}}</option>
+            </select>
+          </div>
+          <div class="col-md-3 mb-3 form-group">
+            <label class="font" for="TourDiscount">{{'insurace.licence'|translate}}</label>
+            <select
+              class="form-control"
+              formControlName="TourDiscount"
+              id="TourDiscount"
+            >
+            <option value="" style="    display: none;"></option>
+
+              <option>{{'insurace.priva'|translate}}</option>
+              <option>{{'insurace.general'|translate}}</option>
+              <option>{{'insurace.otheer'|translate}}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="w-50">
+          <button
+            class="btn btn-lg btn-danger mr-3"
+            mat-button
+            matStepperPrevious
+          >
+            Back
+          </button>
+
+          <button
+            class="btn btn-lg btn-info mr-3"
+            (click)="scondform()"
+            mat-button
+            matStepperNext
+          >
+            Next
+          </button>
+          <button
+            mat-button
+            class="btn btn-lg btn-primary mr-4"
+            (click)="resetform(secondFormGroup)"
+          >
+            Reset
+          </button>
+        </div>
+      </form>
+      <div></div>
+    </mat-step>
+    <mat-step>
+      <ng-template class="ng-template" matStepLabel>{{'insuracedoc.title'|translate}}</ng-template>
+      <form class="divInput2" dir="rtl" [formGroup]="forthFormGroup">
+        <div class="flexheader">
+          <h1>{{'insuracedoc.title'|translate}}</h1>
+        </div>
+        <hr />
+        <div class="flexdiv2">
+          <label class="font">{{'insuracedoc.qustion'|translate}}</label>
+          <br />
+
+          <!-- <input type="date" [(ngModel)]="age" /> -->
+
+          <input
+            type="date"
+            class="form-control w-25"
+            formControlName="date"
+            [(ngModel)]="dateOfBirth"
+            name="something"
+          />
+          <!-- <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker> -->
+          <br />
+          <br />
+          <br />
+
+          <!-- <label class="font">{{ showAge | date: "yyyy-MM-dd" }}</label> -->
+          <div class="col-md-3 mb-3 form-group">
+            <label class="font" for="Title">{{'insuracedoc.choosemonth'|translate}}</label>
+            <select
+              class="form-control"
+              formControlName="calender"
+              [(ngModel)]="noyear"
+              id="Title"
+            >
+            <option value="" style="    display: none;"></option>
+
+              <option>{{'insuracedoc.mon1'|translate}}</option>
+              <option>{{'insuracedoc.mon2'|translate}}</option>
+              <option>{{'insuracedoc.mon3'|translate}}</option>
+              <option>{{'insuracedoc.mon4'|translate}}</option>
+              <option>{{'insuracedoc.mon5'|translate}}</option>
+              <option>{{'insuracedoc.mon6'|translate}}</option>
+              <option>{{'insuracedoc.mon7'|translate}}</option>
+              <option>{{'insuracedoc.mon8'|translate}}</option>
+              <option>{{'insuracedoc.mon9'|translate}}</option>
+              <option>{{'insuracedoc.mon10'|translate}}</option>
+              <option>{{'insuracedoc.mon11'|translate}}</option>
+              <option>{{'insuracedoc.mon12'|translate}}</option>
+            </select>
+          </div>
+        </div>
+
+        <br />
+        <br />
+        <div>
+          <!-- <button  (click)="datee()" class="btn btn-lg btn-info mr-4">date</button> -->
+
+          <button
+            mat-button
+            matStepperPrevious
+            class="btn btn-lg btn-danger mr-4"
+          >
+            Back
+          </button>
+          <button
+            mat-button
+            matStepperNext
+            (click)="thirdform()"
+            class="btn btn-lg btn-info mr-4"
+          >
+            Next
+          </button>
+          <button
+            mat-button
+            class="btn btn-lg btn-primary mr-4"
+            (click)="resetform(forthFormGroup)"
+          >
+            Reset
+          </button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <form class="divInput" [formGroup]="thirdFormGroup" dir="rtl">
+        <ng-template matStepLabel>{{'insuracedoc.headform'|translate}}</ng-template>
+        <div class="flexheader">
+          <h1>{{'insuracedoc.addres'|translate}}</h1>
+        </div>
+        <hr />
+        <div class="form-row">
+          <div class="col-md-6 mb-3">
+            <label for="validationServer01" class="font">{{'insuracedoc.dar'|translate}}</label>
+            <input
+              formControlName="Name"
+              type="text"
+              class="form-control"
+              id="validationServer01"
+              value="Mark"
+              required
+            />
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="validationServer01" class="font">{{'insuracedoc.kada'|translate}}</label>
+            <input
+              formControlName="Email"
+              type="text"
+              class="form-control"
+              id="validationServer01"
+              value="Mark"
+              required
+            />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col-md-4 mb-3">
+            <label for="validationServer01" class="font">{{'insuracedoc.mohafza'|translate}}</label>
+
+            <select class="form-control" formControlName="Mobile" id="Date">
+            <option value="" style="    display: none;"></option>
+
+              <option>{{'insuracedoc.mohafza1'|translate}}</option>
+              <option>{{'insuracedoc.mohafza2'|translate}}</option>
+              <option>{{'insuracedoc.mohafza3'|translate}}</option>
+              <option>{{'insuracedoc.mohafza4'|translate}}</option>
+              <option>{{'insuracedoc.mohafza5'|translate}}</option>
+              <option>{{'insuracedoc.mohafza6'|translate}}</option>
+              <option>{{'insuracedoc.mohafza7'|translate}}</option>
+              <option>{{'insuracedoc.mohafza8'|translate}}</option>
+              <option>{{'insuracedoc.mohafza9'|translate}}</option>
+              <option>{{'insuracedoc.mohafza10'|translate}}</option>
+              <option>{{'insuracedoc.mohafza11'|translate}}</option>
+              <option>{{'insuracedoc.mohafza12'|translate}}</option>
+              <option>{{'insuracedoc.mohafza13'|translate}}</option>
+              <option>{{'insuracedoc.mohafza14'|translate}}</option>
+              <option>{{'insuracedoc.mohafza15'|translate}}</option>
+              <option>{{'insuracedoc.mohafza16'|translate}}</option>
+              <option>{{'insuracedoc.mohafza17'|translate}}</option>
+              <option>{{'insuracedoc.mohafza18'|translate}}</option>
+            
+            </select>
+          </div>
+        </div>
+        <div>
+          <button
+            class="btn btn-lg btn-danger mr-3"
+            mat-button
+            matStepperPrevious
+          >
+            Back
+          </button>
+
+          <button
+            mat-button
+            matStepperNext
+            class="btn btn-lg btn-info mr-4"
+            (click)="forthform()"
+          >
+            Next
+          </button>
+          <button
+            mat-button
+            class="btn btn-lg btn-primary mr-4"
+            (click)="resetform(thirdFormGroup)"
+          >
+            Reset
+          </button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>{{'company.title'|translate}}</ng-template>
+      <div class="flexheader">
+        <h1>{{'company.toptitle'|translate}}</h1>
+      </div>
+      <div class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div *ngFor="let c of Cards" class="col-lg-3 col-md-6 col-sm-6">
+              <div class="card card-stats">
+                <div class="card-header {{ c.ColorBck }} card-header-icon">
+                  <div class="card-icon">
+                    <!-- <i class="material-icons">globe-americas</i> -->
+                    <!-- <i class="{{c.Icon}}"></i> -->
+                    <img src="{{ c.Icon }}" />
+                    <!-- <i class="fas fa-hotel material-icons"></i> -->
+                  </div>
+                  <p class="card-category">{{ c.title }}</p>
+                  <h3 class="card-title">
+                    ${{ c.NoDocument | number: "1.0-0" }}
+                    <!-- <small>GB</small> -->
+                  </h3>
+                </div>
+                <div class="card-footer">
+                  <div class="stats">
+                    <button
+                      mat-button
+                      matStepperNext
+                      class="ml-4 btn btn-lg btn-success"
+                      (click)="addInfo(c.NoDocument, c.Icon, c.title)"
+                    >
+                    {{'company.btnChoose'|translate}}
+                    </button>
+                    <!-- <button mat-button  class="btn btn-lg btn-primary mr-4" (click)="resetform(thirdFormGroup)">Reset</button> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button class="btn btn-lg btn-danger" mat-button matStepperPrevious>
+          Back
+        </button>
+
+        <!-- <button mat-button (click)="stepper.reset()">Reset</button> -->
+      </div>
+    </mat-step>
+
+    <mat-step>
+      <ng-template matStepLabel>{{'bill.top'|translate}}</ng-template>
+      <div class="divInput" dir="rtl">
+        <div class="flexheader">
+          <h1 class="bckfont">{{'bill.thank'|translate}}</h1>
+        </div>
+        <hr />
+        <div class="titleinsurance">
+          <h1>{{'bill.elkher'|translate}}</h1>
+        </div>
+        <div id="print-section" class="">
+          <h2>{{'bill.please'|translate}}</h2>
+          <div class="flexdiv">
+            <h3 class="boldfont">{{'bill.type'|translate}}</h3>
+            <h3 class="mr-5">{{'bill.elkher'|translate}}</h3>
+          </div>
+          <div class="flexdiv"> 
+            <h3 class="boldfont">{{'bill.name'|translate}}</h3>
+            <h3 class="mr-5">{{'bill.tameni'|translate}}</h3>
+          </div>
+          <div class="flexdiv">
+            <h3 class="boldfont">{{'bill.number'|translate}}</h3>
+            <h3 class="mr-5">{{ random }}</h3>
+          </div>
+          <div class="flexdiv">
+            <h3 class="boldfont">{{'bill.quntity'|translate}}</h3>
+            <h3 class="mr-5">${{ item.NoDocument }}</h3>
+          </div>
+
+          <h2>{{'bill.info'|translate}}</h2>
+          <hr />
+
+          <div class="flexdiv">
+            <div>
+              <div class="flexdiv">
+                <h3 class="boldfont">{{'bill.nameper'|translate}}</h3>
+                <h3 class="mr-5">{{ item.Name }}</h3>
+              </div>
+
+              <div class="flexdiv">
+                <h3 class="boldfont">{{'bill.mobile'|translate}}</h3>
+                <h3 class="mr-5">{{ item.Mobile }}</h3>
+              </div>
+
+              <div class="flexdiv">
+                <h3 class="boldfont">{{'bill.mail'|translate}}</h3>
+                <h3 class="mr-5">{{ item.Email }}</h3>
+              </div>
+            </div>
+
+            <div class="mr-5">
+              <div class="flexdiv">
+                <h3 class="boldfont">{{'bill.tasalsol'|translate}}</h3>
+                <h3 class="mr-5">{{ item.serialNumber }}</h3>
+              </div>
+              <div class="flexdiv">
+                <h3 class="boldfont">{{'bill.date'|translate}}</h3>
+                <h3 class="mr-5">{{ dateOfBirth | date: "mediumDate" }}</h3>
+              </div>
+
+              <div class="flexdiv">
+                <h3 class="boldfont">{{'bill.dateend'|translate}}</h3>
+                <h3 class="mr-5">{{ showAge | date: "mediumDate" }}</h3>
+              </div>
+              <div class="flexdiv">
+                <h3 class="boldfont">{{'bill.vechtype'|translate}}</h3>
+                <h3 class="mr-5">{{ item.carType }}</h3>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <button
+            class="btn btn-lg btn-success"
+            printSectionId="print-section"
+            ngxPrint
+          >
+            Print
+          </button>
+
+          <button
+            class="btn btn-lg btn-danger mr-4"
+            mat-button
+            matStepperPrevious
+          >
+            Back
+          </button>
+          <!-- <button mat-button (click)="stepper.reset()">Reset</button> -->
+        </div>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+</div>
