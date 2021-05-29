@@ -27,8 +27,14 @@
             "tsConfig": "tsconfig.app.json",
             "aot": true,
             "assets": [
+              {
+                "glob": "_redirects",
+                "input": "src",
+                "output": "/"
+              },
               "src/favicon.ico",
               "src/assets"
+              
             ],
             "styles": [
               "src/styles.scss"

@@ -94,11 +94,11 @@ yeararr:any[]=[]
       this.translate.use(languageService.getLanguage());
 
 
-    this.firstFormGroup = this._formBuilder.group({
-      Email: new FormControl(localStorage.getItem("currentUserEmail"), [Validators.required,Validators.email]),
-      Name: new FormControl('', [Validators.required,Validators.minLength(5)]),
-      Mobile: new FormControl('', [Validators.required,Validators.minLength(5)]),
-    });
+      this.firstFormGroup = this._formBuilder.group({
+        Email: new FormControl(localStorage.getItem("currentUserEmail"), [Validators.required,Validators.email]),
+        Name: new FormControl('', [Validators.required,Validators.minLength(50)]),
+        Mobile: new FormControl('', [Validators.required,Validators.minLength(11)]),
+      });
     this.secondFormGroup = this._formBuilder.group({
    
       id:new FormControl('', Validators.required),

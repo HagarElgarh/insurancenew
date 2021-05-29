@@ -10,6 +10,16 @@
 .rtl{
     direction: rtl;
 }
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
 h1{
     direction: rtl;
     font-size: 30px;
